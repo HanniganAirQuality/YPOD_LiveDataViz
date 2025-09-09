@@ -12,3 +12,4 @@ Thanks to Izzy for this suggestion! Here we will be tracking each version of the
 | ------------- | -------------- | ------------- | -------------      | ----------------------------------------------- |
 | V3.5.0      	| Initial Upload | Percy         | September 20, 2024 | Moving documents to central git		     	|
 | V3.5.1        | Pre-2023b      | Percy         | January 23, 2025   | Makes code compatible with older versions of MATLAB	|
+| V4.0.0        | Embedded Cal   | Sascha        | September 9, 2025  | Updated to accept formatting without BME180 "blanks"	|
