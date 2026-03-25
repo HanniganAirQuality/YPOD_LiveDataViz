@@ -2,6 +2,8 @@
 ## Logistics Notes
 **YOU MUST USE V4.0.0 OF THIS SOFTWARE**
 
+**Note: PM signals will be delayed by 1-2 minutes. This is because of the firmware of the YPOD which has a timeout for the communication line of the PMS5003. NO OTHER SENSORS DO THIS. YES WE DO KNOW ABOUT IT (thank you Julia) & YES WE ARE TRYING TO FIX IT**
+
 ## Using this Code
 Please visit this powerpoint file for usage instructions:
 - https://o365coloradoedu.sharepoint.com/:p:/s/PBL-AQIQ/EZn_Lh8fFzlOiEY1eOcSXd8BSavE2FrzUjpW30_fhewGBw?e=YewhLK
