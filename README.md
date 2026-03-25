@@ -1,12 +1,16 @@
-# Logistics Notes
-For MATLAB pre-2023b, please use V3.5.1.
-- For MATLAB 2023b or later, you can use V3.5.0.
+# For PBL Students
+## Logistics Notes
+**YOU MUST USE V4.0.0 OF THIS SOFTWARE**
 
-# Using this Code
+## Using this Code
 Please visit this powerpoint file for usage instructions:
 - https://o365coloradoedu.sharepoint.com/:p:/s/PBL-AQIQ/EZn_Lh8fFzlOiEY1eOcSXd8BSavE2FrzUjpW30_fhewGBw?e=YewhLK
 
-# Update Tracker
+# For HAQ Development Team 
+## YPOD Firmware Requirements
+For re-upload of firmware you must use YPOD_V3.5.1 and above - see version tracking here: https://github.com/HanniganAirQuality/YPOD
+
+## Update Tracker
 Thanks to Izzy for this suggestion! Here we will be tracking each version of the firmware.
 | Version       | "Named" Ver.   | Pilot         | Date               | Description & Purpose                		|
 | ------------- | -------------- | ------------- | -------------      | ----------------------------------------------- |
