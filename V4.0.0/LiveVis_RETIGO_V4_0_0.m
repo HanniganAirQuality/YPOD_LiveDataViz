@@ -5,7 +5,7 @@
 % @author   Percy Smith, percy.smith@colorado.edu   
 % @brief    Firmware meant to visualize POD data live! 
 %
-% @date     June 26, 2025
+% @date     June 25, 2025
 % @version  4.0.0
 % @log      Add case for CU Wizards, update to standardized headers
 %
@@ -13,16 +13,16 @@
 close all; clear; 
 
     %% SETTINGS
-    COMPORT = "/dev/cu.usbmodem11301";
+COMPORT = "/dev/cu.usbmodem1301";
         %if u don't know the com port, run serialportlist in command window
     
     %% Initialize variables and establish serial connection
-    device = serialport(COMPORT,9600); 
+device = serialport(COMPORT, 9600); 
     
-    configureTerminator(device, 'CR/LF')
-    flush(device)
-    configureCallback(device, 'terminator', @myCallback)
-    device.Timeout = 60;
+configureTerminator(device, 'CR/LF')
+flush(device)
+configureCallback(device, 'terminator', @myCallback)
+device.Timeout = 60;
 
 % cleanupAndClose(device);
 %% Callback
@@ -393,11 +393,11 @@ end
 %% CASE 7: CU_WIZARDS
 function CU_WIZARDS(src)
     % Used to be orderedcolors('reef') - corrected 1/23/25
-    R = [221 84 0; 84 182 255; 17 113 190; 254 114 67; 116 235 218; 0 163 163];
-        R = R./255;
+    % R = [221 84 0; 84 182 255; 17 113 190; 254 114 67; 116 235 218; 0 163 163];
+    %     R = R./255;
     % Used to be orderedcolors('meadow') - corrected 1/23/25
-    M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
-        M = M./255;
+    % M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
+    %     M = M./255;
     t = datetime(src.UserData(:,1)) + hours(1);
     lightVOC = str2double(src.UserData(:, 8));
     CO_2 = str2double(src.UserData(:, 12));
@@ -405,17 +405,17 @@ function CU_WIZARDS(src)
     PM25 = str2double(src.UserData(:, 14));
 
     tbl = timetable(t, lightVOC, CO_2, RH, PM25);
-    sz = 25;
+    sz = 30;
     figure(1)
     tiledlayout(2, 2, 'TileSpacing', 'tight', 'Padding', 'tight');
     % Top L, rH
     ax2 = nexttile(1);
         RH_LIMS = [0.99*min(tbl.RH), 1.01*max(tbl.RH)];
-        plot(tbl.t, tbl.RH, 'k');
+        plot(tbl.t, tbl.RH, 'Color', [98 180 191]./255, 'LineWidth', 2);
         hold on;
         scatter(tbl.t, tbl.RH, sz, tbl.RH, 'filled');
-        grid on;
-        title('Relative Humidity');
+        % grid on;
+        title('Relative Humidity', 'FontSize', 20);
         ylabel('Humidity [% RH]');
         xlim([min(t)-seconds(5), max(t)+seconds(5)]);
         ylim(RH_LIMS);
@@ -424,25 +424,25 @@ function CU_WIZARDS(src)
         colormap(ax2, 'sky');
     % Top R, PM2.5
     nexttile(2);
-         plot(tbl.t, tbl.PM25, 'Color', R(5,:), 'LineWidth', 1.5);
-            grid on;
-        title('Particulate Matter 2.5');
+         plot(tbl.t, tbl.PM25, 'Color', [230 90 104]./255, 'LineWidth', 2);
+            % grid on;
+        title('Particulate Matter 2.5', 'FontSize', 20);
             ylabel('PM 2.5 [ug/m^3]');
                 ylim([0 max(PM25)+10]);
                 xlim([min(t)-seconds(5), max(t)+seconds(5)]);
     % Bottom L, CO2
     nexttile(3);
-        plot(tbl.t, tbl.CO_2, 'Color', R(4,:), 'LineWidth', 1.5);
-        grid on;
-        title('Carbon Dioxide (CO_2)');
+        plot(tbl.t, tbl.CO_2, 'Color', [255 107 48]./255, 'LineWidth', 2);
+        % grid on;
+        title('Carbon Dioxide (CO_2)', 'FontSize', 20);
         ylabel('CO_2 [ppm]');
         ylim([min(tbl.CO_2)*0.99, max(tbl.CO_2)*1.01]);
         xlim([min(t)-seconds(5), max(t)+seconds(5)]);
     % Bottom R, light VOC
     nexttile(4);
-        plot(tbl.t, tbl.lightVOC, 'Color', M(7,:), 'LineWidth', 1.5);
-        grid on;
-        title('Volatile Organic Compounds');
+        plot(tbl.t, tbl.lightVOC, 'Color', [100 204 182]./255, 'LineWidth', 2);
+        % grid on;
+        title('Volatile Organic Compounds', 'FontSize', 20);
         ylabel('Light VOC');
         xlim([min(t)-seconds(5), max(t)+seconds(5)]);
         ylim([min(tbl.lightVOC)*0.99, max(tbl.lightVOC)*1.01]);
