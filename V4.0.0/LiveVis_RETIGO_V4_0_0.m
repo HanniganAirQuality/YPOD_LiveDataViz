@@ -5,9 +5,9 @@
 % @author   Percy Smith, percy.smith@colorado.edu   
 % @brief    Firmware meant to visualize POD data live! 
 %
-% @date     June 25, 2025
+% @date     June 26, 2025
 % @version  4.0.0
-% @log      Add case for CU Wizards
+% @log      Add case for CU Wizards, update to standardized headers
 %
 %% Terminate
 close all; clear; 
@@ -64,7 +64,7 @@ function CO2_ONLY(src)
     R = [221 84 0; 84 182 255; 17 113 190; 254 114 67; 116 235 218; 0 163 163];
         R = R./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    CO_2 = str2double(src.UserData(:,8));
+    CO_2 = str2double(src.UserData(:, 12));
     tbl = timetable(t,CO_2);
         [MAX, ~] = max(tbl.CO_2);
             MAXLINE = sprintf('CO_2 max = %u ppm, ', MAX);
@@ -90,8 +90,8 @@ function VOC_2CHANNEL(src)
     M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
         M = M./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    heavyVOC = str2double(src.UserData(:,4));
-    lightVOC = str2double(src.UserData(:,5));
+    heavyVOC = str2double(src.UserData(:, 7));
+    lightVOC = str2double(src.UserData(:, 8));
     tbl = timetable(t, heavyVOC, lightVOC);
         [heavyMAX, ~] = max(tbl.heavyVOC);
             heavyMAXLINE = sprintf('Heavy VOC max = %u [ADU], ', heavyMAX);
@@ -124,7 +124,7 @@ function PM25_ONLY(src)
     R = [221 84 0; 84 182 255; 17 113 190; 254 114 67; 116 235 218; 0 163 163];
         R = R./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    PM25 = str2double(src.UserData(:,10));
+    PM25 = str2double(src.UserData(:, 14));
     tbl = timetable(t,PM25);
         [MAX, ~] = max(tbl.PM25);
             MAXLINE = sprintf('PM 2.5 max = %u ug/m^3, ', MAX);
@@ -153,12 +153,12 @@ function SHOW_ALL(src)
     M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
         M = M./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    heavyVOC = str2double(src.UserData(:,5));
-    lightVOC = str2double(src.UserData(:,6));
-    CO_2 = str2double(src.UserData(:,9));
-    PM25 = str2double(src.UserData(:,10));
-    T = str2double(src.UserData(:,2));
-    RH = str2double(src.UserData(:,3));
+    heavyVOC = str2double(src.UserData(:, 8));
+    lightVOC = str2double(src.UserData(:, 7));
+    CO_2 = str2double(src.UserData(:, 12));
+    PM25 = str2double(src.UserData(:, 14));
+    T = str2double(src.UserData(:, 4));
+    RH = str2double(src.UserData(:, 5));
     tbl = timetable(t, heavyVOC, lightVOC, CO_2, PM25, T, RH);
 
     sz = 25;
@@ -234,12 +234,12 @@ function CAR_EMISSIONS(src)
     M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
         M = M./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    heavyVOC = str2double(src.UserData(:,5));
-    lightVOC = str2double(src.UserData(:,6));
-    CO_2 = str2double(src.UserData(:,9));
-    CO = str2double(src.UserData(:,8));
-    T = str2double(src.UserData(:,2));
-    RH = str2double(src.UserData(:,3));
+    heavyVOC = str2double(src.UserData(:,8));
+    lightVOC = str2double(src.UserData(:,7));
+    CO_2 = str2double(src.UserData(:,12));
+    CO = str2double(src.UserData(:, 10));
+    T = str2double(src.UserData(:, 4));
+    RH = str2double(src.UserData(:, 5));
     tbl = timetable(t, heavyVOC, lightVOC, CO_2, CO, T, RH);
 
     sz = 25;
@@ -315,13 +315,13 @@ function CO_PM_ALL(src)
     M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
         M = M./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    heavyVOC = str2double(src.UserData(:,5));
-    lightVOC = str2double(src.UserData(:,6));
-    CO = str2double(src.UserData(:,8));
-    CO_2 = str2double(src.UserData(:,9));
-    PM25 = str2double(src.UserData(:,10));
-    T = str2double(src.UserData(:,2));
-    RH = str2double(src.UserData(:,3));
+    heavyVOC = str2double(src.UserData(:, 8));
+    lightVOC = str2double(src.UserData(:, 7));
+    CO = str2double(src.UserData(:, 10));
+    CO_2 = str2double(src.UserData(:, 12));
+    PM25 = str2double(src.UserData(:, 14));
+    T = str2double(src.UserData(:,4));
+    RH = str2double(src.UserData(:, 5));
     tbl = timetable(t, heavyVOC, lightVOC, CO, CO_2, PM25, T, RH);
 
     sz = 25;
@@ -399,10 +399,10 @@ function CU_WIZARDS(src)
     M = [2 88 14; 58 200 49; 255 214 10; 254 144 67; 192 76 11; 250 138 212; 125 169 255];
         M = M./255;
     t = datetime(src.UserData(:,1)) + hours(1);
-    lightVOC = str2double(src.UserData(:,8));
-    CO_2 = str2double(src.UserData(:,12));
-    RH = str2double(src.UserData(:,5));
-    PM25 = str2double(src.UserData(:,14));
+    lightVOC = str2double(src.UserData(:, 8));
+    CO_2 = str2double(src.UserData(:, 12));
+    RH = str2double(src.UserData(:, 5));
+    PM25 = str2double(src.UserData(:, 14));
 
     tbl = timetable(t, lightVOC, CO_2, RH, PM25);
     sz = 25;
